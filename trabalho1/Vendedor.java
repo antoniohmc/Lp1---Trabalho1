@@ -2,12 +2,15 @@ package trabalho1;
 
 import java.time.LocalDate;
 
-public class Vendedor extends Pessoa {
+public class Vendedor extends Pessoa implements Comparable<Vendedor>{
     private String matricula;
 
     private double percentualComissao;
 
     private LocalDate dtAdimissao;
+
+    public Vendedor() {
+    }
 
     public Vendedor(String nome, String cpf, String matricula, double percentualComissao, LocalDate dtAdimissao) {
         super(nome, cpf);
@@ -26,5 +29,10 @@ public class Vendedor extends Pessoa {
 
     public LocalDate getDtAdimissao() {
         return dtAdimissao;
+    }
+
+    @Override
+    public int compareTo(Vendedor vendedor) {
+        return getNome().compareTo(vendedor.getNome());
     }
 }

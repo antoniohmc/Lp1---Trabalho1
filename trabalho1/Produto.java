@@ -1,6 +1,8 @@
 package trabalho1;
 
-public class Produto {
+
+
+public class Produto implements Comparable<Produto> {
 
     private String nome;
 
@@ -9,6 +11,9 @@ public class Produto {
     private float quantidadeMaxima;
 
     private int codigo;
+
+    public Produto() {
+    }
 
     public Produto(String nome, double valor, float quantidadeMaxima, int codigo) {
         this.nome = nome;
@@ -47,5 +52,9 @@ public class Produto {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public int compareTo(Produto produto) {
+        return nome.compareTo(produto.getNome());
     }
 }

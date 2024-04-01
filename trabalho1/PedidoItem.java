@@ -1,5 +1,7 @@
 package trabalho1;
 
+import java.util.Objects;
+
 public class PedidoItem {
 
     private Produto produto;
@@ -25,5 +27,21 @@ public class PedidoItem {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        PedidoItem that = (PedidoItem) o;
+        return produto.equals(that.produto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(produto);
     }
 }

@@ -1,10 +1,11 @@
 package trabalho1;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Objects;
 
 public class Pedido {
-    private List <String> itens;
+
+    private Collection<PedidoItem> itens;
 
     private Cliente cliente;
 
@@ -12,18 +13,18 @@ public class Pedido {
 
     private double total;
 
-    public Pedido(List<String> itens, Cliente cliente, Vendedor vendedor, double total) {
-        this.itens = new ArrayList<>();
+    public Pedido(Collection<PedidoItem> itens, Cliente cliente, Vendedor vendedor, double total) {
+        this.itens = itens;
         this.cliente = cliente;
         this.vendedor = vendedor;
         this.total = total;
     }
 
-    public List<String> getItens() {
+    public Collection<PedidoItem> getItem() {
         return itens;
     }
 
-    public void setItens(List<String> itens) {
+    public void setItem(Collection<PedidoItem> item) {
         this.itens = itens;
     }
 
@@ -49,5 +50,24 @@ public class Pedido {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public void adicionarItem(PedidoItem item) throws ItemDuplicadoException , QuantidadeNaoPermitidaException{
+        itens.add(item);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Pedido pedido = (Pedido) o;
+        return itens.equals(pedido.itens);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itens);
     }
 }
