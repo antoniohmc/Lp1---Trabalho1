@@ -1,4 +1,7 @@
-package trabalho1;
+package trabalho1.exception;
+
+import trabalho1.pedido.PedidoItem;
+import trabalho1.pedido.Produto;
 
 public class QuantidadeNaoPermitidaException extends Exception {
 

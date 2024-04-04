@@ -1,5 +1,11 @@
 package trabalho1;
 
+import trabalho1.pedido.Pedido;
+import trabalho1.pedido.Produto;
+import trabalho1.exception.RegistroNaoEncontradoException;
+import trabalho1.pessoa.Cliente;
+import trabalho1.pessoa.Vendedor;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,50 +19,67 @@ public class Loja {
     public Loja() {
     }
 
-    public Collection<Pedido> listarPedidos() throws RegistroNaoEncontradoException {
+    public Collection<Pedido> listarPedidos() {
         if (listaPedidos.isEmpty()) {
-            throw new RegistroNaoEncontradoException();
+            System.out.println("Lista vazia");
         }
+
+        listaPedidos.forEach(pedido -> System.out.println("Cliente " + pedido.getCliente()
+                + " Vendedor " + pedido.getVendedor()
+                + " Itens " + pedido.getItens()
+                + " total " + pedido.getTotal()));
         return listaPedidos;
     }
+
 
     public void cadastrarPedido(Pedido pedido) {
         listaPedidos.add(pedido);
     }
 
-    public void listarClientes() throws RegistroNaoEncontradoException {
+    public void listarClientes() {
         if (listaClientes.isEmpty()) {
-            throw new RegistroNaoEncontradoException();
+            System.out.println("Lista vazia");
         }
 
         listaClientes
-            .forEach(cliente -> System.out.println(
-                "Nome: " + cliente.getNome() + " CPF: " + cliente.getCpf() + " Cadastro: " + cliente.getDtCadastro()));
+                .forEach(cliente -> System.out.println(
+                        "Nome: " + cliente.getNome()
+                                + " CPF: " + cliente.getCpf()
+                                + " Cadastro: " + cliente.getDtCadastro()));
     }
+
 
     public void cadastrarClientes(Cliente cliente) {
         listaClientes.add(cliente);
     }
 
-    public void listaProduto() throws RegistroNaoEncontradoException {
+
+    public void listaProduto() {
         if (listaProduto.isEmpty()) {
-            throw new RegistroNaoEncontradoException();
+            System.out.println("Lista vazia");
         }
         listaProduto.forEach(produto -> System.out.println(
-            "Nome: " + produto.getNome() + "   Valor: " + produto.getValor() + "   Quantidade Maxima de produtos: "
-                + produto.getQuantidadeMaxima() + "   Codigo:" + produto.getCodigo()));
+                "Nome: " + produto.getNome() + " Valor: " + produto.getValor()
+                        + " Quantidade Maxima de produtos: " + produto.getQuantidadeMaxima()
+                        + " Codigo:" + produto.getCodigo()));
     }
+
 
     public void cadastrarProduto(Produto produto) {
         listaProduto.add(produto);
     }
 
-    public Collection<Vendedor> listaVendedores() throws RegistroNaoEncontradoException {
+    public void listaVendedores() {
         if (listaVendedores.isEmpty()) {
-            throw new RegistroNaoEncontradoException();
+            System.out.println("Lista vazia");
         }
-        return listaVendedores;
+        listaVendedores.forEach(vendedor -> System.out.println( "Nome: " + vendedor.getNome()
+                + " Cpf: " + vendedor.getCpf()
+                + " Matricula: " + vendedor.getMatricula()
+                + " Percentual de comissão: " + vendedor.getPercentualComissao()
+                + " Data de adimissão: " + vendedor.getDtAdimissao()));
     }
+
 
     public void cadastrarVendedores(Vendedor vendedor) {
         listaVendedores.add(vendedor);
@@ -72,6 +95,7 @@ public class Loja {
         return total;
     }
 
+
     public double totalLiquidoVendas(Vendedor v) throws RegistroNaoEncontradoException {
         double total = 0;
 
@@ -81,6 +105,4 @@ public class Loja {
 
         return total;
     }
-
-
 }

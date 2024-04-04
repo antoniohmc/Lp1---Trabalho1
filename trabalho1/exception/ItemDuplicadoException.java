@@ -1,4 +1,4 @@
-package trabalho1;
+package trabalho1.exception;
 
 public class ItemDuplicadoException extends Exception {
 
