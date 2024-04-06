@@ -8,6 +8,9 @@ public class PedidoItem {
 
     private int quantidade;
 
+    public PedidoItem() {
+    }
+
     public PedidoItem(Produto produto, int quantidade) {
         this.produto = produto;
         this.quantidade = quantidade;

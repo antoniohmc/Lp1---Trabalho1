@@ -1,5 +1,7 @@
 package trabalho1;
 
+import trabalho1.pedido.Pedido;
+import trabalho1.pedido.PedidoItem;
 import trabalho1.pedido.Produto;
 import trabalho1.exception.RegistroNaoEncontradoException;
 import trabalho1.pessoa.Cliente;
@@ -14,8 +16,10 @@ public class Menu {
     public static void main(String[] args) {
 
         Loja loja = new Loja() {
-
         };
+
+        Cliente cliente = new Cliente();
+        Vendedor vendedor = new Vendedor();
 
         while (true) {
             try {
@@ -94,26 +98,34 @@ public class Menu {
                         break;
 
                     case 4:
+                        System.out.println("Seja bem vindo ao nosso atendimento !!");
+
+                        loja.cadastrarPedido(new Pedido(cliente,vendedor));
+
+
+
+
+                    case 5:
                         loja.listarClientes();
                         break;
 
-                    case 5:
+                    case 6:
                         loja.listaProduto();
                         break;
 
-                    case 6:
+                    case 7:
                         loja.listaVendedores();
                         break;
 
-                    case 7:
+                    case 8:
                         loja.listarPedidos();
                         break;
 
-                    case 8:
+                    case 9:
                         loja.totalBrutoVendas();
                         break;
 
-                    case 9:
+                    case 10:
                         loja.totalLiquidoVendas(new Vendedor());
                         break;
 
@@ -141,12 +153,13 @@ public class Menu {
         System.out.println("1 - Cadastrar produtos");
         System.out.println("2 - Cadastrar clientes");
         System.out.println("3 - Cadastrar vendedores");
-        System.out.println("4 - Listar clientes");
-        System.out.println("5 - Listar produtos");
-        System.out.println("6 - Listar vendedores");
-        System.out.println("7 - Listar pedidos");
-        System.out.println("8 - Total bruto de vendas");
-        System.out.println("9 - total liquido de vendas");
+        System.out.println("4 - Adicionar pedido");
+        System.out.println("5 - Listar clientes");
+        System.out.println("6 - Listar produtos");
+        System.out.println("7 - Listar vendedores");
+        System.out.println("8 - Listar pedidos");
+        System.out.println("9 - Total bruto de vendas");
+        System.out.println("10 - total liquido de vendas");
         System.out.println("0 - Sair");
 
         try {
