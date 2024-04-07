@@ -1,15 +1,14 @@
 package trabalho1;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import trabalho1.exception.ItemDuplicadoException;
+import trabalho1.exception.RegistroNaoEncontradoException;
 import trabalho1.pedido.Pedido;
 import trabalho1.pedido.PedidoItem;
 import trabalho1.pedido.Produto;
-import trabalho1.exception.RegistroNaoEncontradoException;
 import trabalho1.pessoa.Cliente;
 import trabalho1.pessoa.Vendedor;
-
-import java.time.LocalDate;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Menu {
 
@@ -20,6 +19,9 @@ public class Menu {
 
         Cliente cliente = new Cliente();
         Vendedor vendedor = new Vendedor();
+        Pedido pedido = new Pedido();
+        PedidoItem pedidoItem = new PedidoItem();
+        Produto produto = new Produto();
 
         while (true) {
             try {
@@ -28,82 +30,23 @@ public class Menu {
 
                 switch (escolha) {
                     case 1:
-                        System.out.println("Informe o nome do produto: ");
-                        String nomeProduto = scanner.next();
-
-                        System.out.println("Informe o valor do produto: ");
-                        double valorProduto = scanner.nextDouble();
-
-                        System.out.println("Informe a quantidade máxima do produto: ");
-                        float quantidadeMaximaProduto = scanner.nextFloat();
-
-                        System.out.println("Informe o codigo do produto: ");
-                        int codigoProduto = scanner.nextInt();
-
-                        loja.cadastrarProduto(new Produto(nomeProduto,valorProduto,quantidadeMaximaProduto,codigoProduto));
+                        loja.cadastrarProduto(new Produto());
                         System.out.println("Produto cadastrado com sucesso!!");
                         break;
 
                     case 2:
-                        System.out.println("Informe o nome: ");
-                        String nomeCliente = scanner.next();
-
-                        System.out.println("Informe o cpf: ");
-                        String cpf = scanner.next();
-
-
-                        System.out.println("Informações de cadastro");
-                        System.out.println("Informe o ano: ");
-                        int ano = scanner.nextInt();
-
-                        System.out.println("Informe o mês: ");
-                        int mes = scanner.nextInt();
-
-                        System.out.println("Informe o dia");
-                        int dia = scanner.nextInt();
-
-                        LocalDate dtCadastro = LocalDate.of(ano , mes , dia);
-
-                        loja.cadastrarClientes(new Cliente(nomeCliente, cpf, dtCadastro));
+                        loja.cadastrarClientes(new Cliente());
                         System.out.println("Cliente cadastrado com sucesso!!");
                         break;
 
                     case 3:
-                        System.out.println("Informe o nome: ");
-                        String nomeVendedor = scanner.next();
-
-                        System.out.println("Informe o cpf: ");
-                        String cpfVendedor = scanner.next();
-
-                        System.out.println("Informe a Matricula: ");
-                        String matricula = scanner.next();
-
-                        System.out.println("Percentual de comissâo: ");
-                        double comissao = scanner.nextDouble();
-
-                        System.out.println("Data de Adimissão ");
-                        System.out.println("Informe o ano: ");
-                        int anoAdimissao = scanner.nextInt();
-
-                        System.out.println("Informe o mês: ");
-                        int mesAdimissao = scanner.nextInt();
-
-                        System.out.println("Informe o dia");
-                        int diaAdimissao = scanner.nextInt();
-
-                        LocalDate dtaAdimissao = LocalDate.of(anoAdimissao, mesAdimissao, diaAdimissao);
-
-                        loja.cadastrarVendedores(new Vendedor(nomeVendedor, cpfVendedor, matricula, comissao, dtaAdimissao));
+                        loja.cadastrarVendedores(new Vendedor());
                         System.out.println("Vendedor cadastrado com sucesso!!");
                         break;
 
                     case 4:
-                        System.out.println("Seja bem vindo ao nosso atendimento !!");
-
-                        loja.cadastrarPedido(new Pedido(cliente,vendedor));
-
-
-
+                        loja.cadastrarPedido(new Pedido());
+                        break;
 
                     case 5:
                         loja.listarClientes();
@@ -139,10 +82,11 @@ public class Menu {
 
 
                 }
-            } catch (RegistroNaoEncontradoException e) {
-                throw new RuntimeException(e);
-            } catch (IllegalArgumentException | InputMismatchException e) {
+            } catch (RegistroNaoEncontradoException | IllegalArgumentException | InputMismatchException |
+                     NullPointerException e) {
                 e.printStackTrace();
+            } catch (ItemDuplicadoException e) {
+                throw new RuntimeException(e);
             }
         }
     }

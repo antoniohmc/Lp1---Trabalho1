@@ -17,6 +17,10 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
         return dtCadastro;
     }
 
+    public void setDtCadastro(LocalDate dtCadastro) {
+        this.dtCadastro = dtCadastro;
+    }
+
     @Override
     public int compareTo(Cliente cliente) {
         return getNome().compareTo(cliente.getNome());

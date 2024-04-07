@@ -1,5 +1,6 @@
 package trabalho1.pedido;
 
+import java.util.HashSet;
 import trabalho1.pessoa.Cliente;
 import trabalho1.exception.ItemDuplicadoException;
 import trabalho1.exception.QuantidadeNaoPermitidaException;
@@ -20,11 +21,18 @@ public class Pedido {
 
     private double total;
 
-    public Pedido(Cliente cliente, Vendedor vendedor) {
-        this.itens = new LinkedHashSet<>();
+    public Pedido() {
+        this.itens = new HashSet<>();
+    }
+
+    public Pedido(Set<PedidoItem> itens, Cliente cliente, Vendedor vendedor, double total) {
+        this.itens = itens;
         this.cliente = cliente;
         this.vendedor = vendedor;
-        this.total = 0;
+        this.total = total;
+    }
+
+    public Pedido(Vendedor vendedor) {
     }
 
     public void adicionar(PedidoItem item) throws ItemDuplicadoException{
@@ -54,6 +62,18 @@ public class Pedido {
 
     public double getTotal() {
         return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
     }
 
     @Override

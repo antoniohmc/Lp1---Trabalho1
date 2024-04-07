@@ -30,6 +30,18 @@ public class Vendedor extends Pessoa implements Comparable<Vendedor>{
         return dtAdimissao;
     }
 
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public void setPercentualComissao(double percentualComissao) {
+        this.percentualComissao = percentualComissao;
+    }
+
+    public void setDtAdimissao(LocalDate dtAdimissao) {
+        this.dtAdimissao = dtAdimissao;
+    }
+
     @Override
     public int compareTo(Vendedor vendedor) {
         return getNome().compareTo(vendedor.getNome());
