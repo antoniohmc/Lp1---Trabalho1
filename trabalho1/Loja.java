@@ -3,9 +3,10 @@ package trabalho1;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import trabalho1.exception.ItemDuplicadoException;
 import trabalho1.exception.RegistroNaoEncontradoException;
 import trabalho1.pedido.Pedido;
@@ -16,13 +17,11 @@ import trabalho1.pessoa.Vendedor;
 
 public class Loja {
 
-    private final Produto produto = new Produto();
-    private final PedidoItem pedidoItem = new PedidoItem();
-    private final Set<PedidoItem> itens = new HashSet<>();
-    private final Collection<Pedido> listaPedidos = new ArrayList<>();
-    private final Collection<Cliente> listaClientes = new ArrayList<>();
-    private final Collection<Produto> listaProduto = new ArrayList<>();
-    private final Collection<Vendedor> listaVendedores = new ArrayList<>();
+
+    private final List<Pedido> listaPedidos = new ArrayList<>();
+    private final List<Cliente> listaClientes = new ArrayList<>();
+    private final List<Produto> listaProduto = new ArrayList<>();
+    private final List<Vendedor> listaVendedores = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public Loja() {
@@ -45,6 +44,8 @@ public class Loja {
             System.out.println("Lista vazia");
         }
 
+        Collections.sort(listaClientes, Comparator.comparing(Cliente::getNome));
+
         listaClientes
             .forEach(cliente -> System.out.println(
                 "Nome: " + cliente.getNome()
@@ -56,6 +57,8 @@ public class Loja {
         if (listaProduto.isEmpty()) {
             System.out.println("Lista vazia");
         }
+        Collections.sort(listaProduto, Comparator.comparing(Produto::getValor).reversed());
+
         listaProduto.forEach(produto -> System.out.println(
             "Nome: " + produto.getNome() + " Valor: " + produto.getValor()
                 + " Quantidade Maxima de produtos: " + produto.getQuantidadeMaxima()
@@ -161,10 +164,6 @@ public class Loja {
 
         Vendedor vendedorSelecionado = buscarVendedorPorMatricula(scanner);
 
-        PedidoItem pedidoItem = new PedidoItem(produtoSelecionado, 1);
-
-        pedido.adicionar(pedidoItem);
-
         pedido.setCliente(clienteSelecionado);
         pedido.setVendedor(vendedorSelecionado);
 
@@ -216,23 +215,13 @@ public class Loja {
         return pedido.getTotal() + produto.getValor();
     }
 
-    public double totalBrutoVendas() {
+    public void totalBrutoVendas() {
         double total = 0;
 
-        for (Pedido p : listarPedidos()) {
-            total += produto.getValor() * pedidoItem.getQuantidade();
+        for (Pedido p : this.listaPedidos) {
+            total += p.getTotal();
         }
 
-        return total;
-    }
-
-    public double totalLiquidoVendas(Vendedor vendedor) {
-        double total = 0;
-
-        for (Pedido p : listarPedidos()) {
-            total += produto.getValor() * pedidoItem.getQuantidade() - vendedor.getPercentualComissao();
-        }
-
-        return total;
+        System.out.println(total);
     }
 }

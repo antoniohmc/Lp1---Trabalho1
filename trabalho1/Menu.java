@@ -5,7 +5,6 @@ import java.util.Scanner;
 import trabalho1.exception.ItemDuplicadoException;
 import trabalho1.exception.RegistroNaoEncontradoException;
 import trabalho1.pedido.Pedido;
-import trabalho1.pedido.PedidoItem;
 import trabalho1.pedido.Produto;
 import trabalho1.pessoa.Cliente;
 import trabalho1.pessoa.Vendedor;
@@ -16,12 +15,6 @@ public class Menu {
 
         Loja loja = new Loja() {
         };
-
-        Cliente cliente = new Cliente();
-        Vendedor vendedor = new Vendedor();
-        Pedido pedido = new Pedido();
-        PedidoItem pedidoItem = new PedidoItem();
-        Produto produto = new Produto();
 
         while (true) {
             try {
@@ -68,10 +61,6 @@ public class Menu {
                         loja.totalBrutoVendas();
                         break;
 
-                    case 10:
-                        loja.totalLiquidoVendas(new Vendedor());
-                        break;
-
                     case 0:
                         System.out.println("Saindo do programa. Até mais!");
                         System.exit(0);
@@ -103,7 +92,6 @@ public class Menu {
         System.out.println("7 - Listar vendedores");
         System.out.println("8 - Listar pedidos");
         System.out.println("9 - Total bruto de vendas");
-        System.out.println("10 - total liquido de vendas");
         System.out.println("0 - Sair");
 
         try {

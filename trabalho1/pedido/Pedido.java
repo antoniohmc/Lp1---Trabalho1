@@ -32,8 +32,6 @@ public class Pedido {
         this.total = total;
     }
 
-    public Pedido(Vendedor vendedor) {
-    }
 
     public void adicionar(PedidoItem item) throws ItemDuplicadoException{
         if (itens.contains(item)) {

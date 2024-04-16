@@ -2,7 +2,7 @@ package trabalho1.pessoa;
 
 import java.time.LocalDate;
 
-public class Cliente extends Pessoa implements Comparable<Cliente> {
+public class Cliente extends Pessoa {
     private LocalDate dtCadastro;
 
     public Cliente() {
@@ -21,8 +21,5 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
         this.dtCadastro = dtCadastro;
     }
 
-    @Override
-    public int compareTo(Cliente cliente) {
-        return getNome().compareTo(cliente.getNome());
-    }
+
 }
